@@ -1,29 +1,22 @@
 
-% Model matematic:
-% remove_occurences(l1...ln, e) =
-%    [], n = 0
-%    l1 + remove_occurences(l2...ln, e), l1 != e
-%    remove_occurences(l2...ln, e), l1 = e
+% Transform a list into a set in the order of the first occurence.
 
-% remove_occurences(L:list, E:number, R:list)
-% remove_occurences(i, i, o)
+% removeElem(L- list, EL- integer, R- list)
+% removeElem(i,i,o)
 
 removeElem([], _, []).
-removeElem([H|T], EL, R) :- H =:= EL,
+removeElem([H|T], EL, R) :-
+    H =:= EL,  % in this case the head is the element we want to remove, so we won't add it to the result
     removeElem(T, EL, R).
-removeElem([H|T], EL, [H|R]) :- H =\= EL,
+removeElem([H|T], EL, [H|R]) :-
+    H =\= EL, % here, we want to add the head to the result, because it's not the element we're looking to remove
     removeElem(T, EL, R).
 
-% Model matematic:
-% list_to_set(l1...ln) =
-%	[], n = 0
-%	l1 + list_to_set(remove_occurences(l2...ln, l1)), otherwise
-
-% list_to_set(L:list, R:list)
-% list_to_set(i, o)
+% toSet(L-list, R-list)
+% toSet(i, o)
 
 toSet([], []).
-toSet([H|T], [H|R]) :-
+toSet([H|T], [H|R]) :-   % the actual Solve function
     removeElem(T, H, R1),
     toSet(R1, R).
 
