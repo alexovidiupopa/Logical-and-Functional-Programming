@@ -13,8 +13,8 @@ maxListWrapper([H|T],R):- maxList(T,H,R).
 
 %maxPositions(L:list, MAX:int, P:int,R:list)
 %maxPositions(i,i,i,o)
-maxPositions([],_,_,[]):-!.
-maxPositions([MAX|T],MAX,P,R):-!,
+maxPositions([],_,_,[]).
+maxPositions([MAX|T],MAX,P,R):-
     P1 is P+1,
     maxPositions(T,MAX,P1, R1),
     R = [P1|R1].
