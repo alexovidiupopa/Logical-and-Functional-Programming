@@ -1,15 +1,17 @@
 (defun explore_path (l level node)
-( cond
+(cond
   ((null (car l)) nil)
   ((equal (car l) node) (list (car l)))
-  ( T (setq left (explore_path (cadr l) (+ level 1) node ))
-	(cond 
-		((null left) (setq right (explore_path (caddr l) (+ level 1) node ))
+  (T 
+    (setq left (explore_path (cadr l) (+ level 1) node ))
+	  (cond 
+		    ((null left) (setq right (explore_path (caddr l) (+ level 1) node ))
                      (cond
                          ((null right) NIL)
                          (T (append (list (car l)) right))
-                         ))
-		(T (append (list (car l)) left ))
+                      )
+        )
+		    (T (append (list (car l)) left ))
     )
  )
 )

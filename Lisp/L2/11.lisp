@@ -17,7 +17,7 @@
 	(cond
 		((null me) max)
 		((> (list-length me) (list-length max)) (_max-level tree me (+ lvl 1)))
-		(T (_max-level tree me (+ lvl 1)))
+		(T (_max-level tree max (+ lvl 1)))
 	)
 )
 

@@ -9,3 +9,20 @@
 )
 
 (print (subst2 '(1 2 3 4 1 (1)) 1 '(5 5)))
+
+(defun copy (l)
+    (cond
+        ((null l) nil)
+        (t (cons (car l) (copy (cdr l))))
+    )
+)
+
+(defun substitite (l e l1)
+    (cond
+        ((listp l) (list (mapcan #'(lambda (lst) (substitite lst e l1)) l)))
+        ((equal l e) (copy l1)) ; copy required to avoid losing l1 due to destructive behaviour of mapcan
+        (T (list l))
+    )
+)
+
+(print (car (substitite '(1 2 3 4 1 (1)) 1 '(5 5))))
